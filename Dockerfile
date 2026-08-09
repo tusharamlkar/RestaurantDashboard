@@ -6,4 +6,4 @@ COPY RestaurantDashboard.war /usr/local/tomcat/webapps/ROOT.war
 
 EXPOSE 10000
 
-CMD ["sh", "-c", "PORT=${PORT:-10000}; sed -i \"s/port=\\\"8080\\\"/port=\\\"$PORT\\\"/\" /usr/local/tomcat/conf/server.xml; catalina.sh run"]
+CMD ["sh", "-c", "sed -i 's/<Server port=\"8005\" shutdown=\"SHUTDOWN\">/<Server port=\"-1\" shutdown=\"SHUTDOWN\">/' /usr/local/tomcat/conf/server.xml && PORT=${PORT:-10000} && sed -i \"s/port=\\\"8080\\\"/port=\\\"$PORT\\\"/\" /usr/local/tomcat/conf/server.xml && catalina.sh run"]
